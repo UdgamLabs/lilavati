@@ -1,0 +1,6 @@
+torch>=2.3
+transformers>=5.18
+# for eval/ only:
+datasets
+# for app.py only:
+gradio>=5

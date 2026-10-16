@@ -1,0 +1,27 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "lilavati"
+version = "1.0.0"
+description = "Lilavati: a 95M-parameter model that solves maths word problems by writing and running Python"
+readme = "README.md"
+license = "Apache-2.0"
+authors = [{ name = "Udgam Labs" }]
+requires-python = ">=3.10"
+dependencies = ["torch>=2.3", "transformers>=5.18"]
+
+[project.optional-dependencies]
+eval = ["datasets"]
+app = ["gradio>=5"]
+
+[project.scripts]
+lilavati = "lilavati.__main__:main"
+
+[project.urls]
+Homepage = "https://udgamlabs.com/models/lilavati"
+Weights = "https://huggingface.co/UdgamLabs/Lilavati"
+
+[tool.setuptools]
+packages = ["lilavati"]
