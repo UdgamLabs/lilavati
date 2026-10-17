@@ -90,7 +90,7 @@ top pick, and 65.7% by plain majority vote.
 
 <p align="center"><img src="docs/assets/compare.png" alt="GSM8K test: Lilavati 54.7%, cagliostro-v3.5-chat 21.3%, Falcon-H1-Tiny-R 18.7%" width="100%"></p>
 
-Open models up to 150M parameters, greedy GSM8K test, measured by us on 15 October 2026 with one harness. Other models
+Open models up to 150M parameters, greedy GSM8K test, measured by us on 14 and 15 October 2026 with one harness. Other models
 answer in text, their native format. cagliostro-v3.5-chat was scored on the first 300 items; on those, Lilavati scores
 57.3% (about 2.7×). TinyGSM (2023, weights not released) reported higher numbers under its own protocol: 68.9% with a
 125M verifier picking one of 48 programs, where Lilavati with its checker scores 66.7%. The full table is in
