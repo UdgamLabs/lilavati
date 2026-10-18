@@ -6,11 +6,12 @@ import time
 
 import gradio as gr
 
+from gradio_theme import CSS, HEAD, footer, header, theme
 from lilavati import Lilavati
 
 os.chdir(os.path.dirname(os.path.abspath(__file__)))  # so mark.svg resolves wherever the app is launched from
 
-lv = Lilavati(os.environ.get("LILAVATI_MODEL", "UdgamLabs/Lilavati"), os.environ.get("LILAVATI_CHECKER", "UdgamLabs/Lilavati-Checker"))
+lv = Lilavati(os.environ.get("LILAVATI_MODEL", "udgamlabs/Lilavati"), os.environ.get("LILAVATI_CHECKER", "udgamlabs/Lilavati-Checker"))
 lv.solve("Warm up: what is 2 plus 3?", tries=2)
 
 MAX_LEN = 700
@@ -54,41 +55,15 @@ def solve(question, mode):
     return f"## The answer is {fmt(r['answer'])}" + ("\n(I'm not very sure about this one.)" if unsure else ""), note, r["program"]
 
 
-CSS = """
-:root, .dark { --lv-ink:#1C1B18; --lv-ivory:#F3EFE6; --lv-paper:#FBF9F4; --lv-rule:#E3DDD0; --lv-graphite:#6B675E; --lv-signal:#B4432B; }
-.gradio-container { background: var(--lv-ivory) !important; max-width: 1080px !important; margin: 0 auto !important; }
-#lv-head { display:flex; align-items:center; gap:14px; padding: 18px 0 6px; border-bottom: 1px solid var(--lv-rule); margin-bottom: 8px; }
-#lv-head img { width: 40px; height: 40px; }
-#lv-head h1 { font-family: 'Outfit', sans-serif; font-weight: 500; letter-spacing: -0.02em; font-size: 34px; margin: 0; color: var(--lv-ink); }
-#lv-head p { margin: 2px 0 0; color: var(--lv-graphite); font-size: 15px; }
-.lv-label { font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--lv-graphite); }
-.lv-label b { color: var(--lv-signal); font-weight: 500; }
-#lv-answer h2 { font-family: 'Outfit', sans-serif; font-weight: 500; color: var(--lv-signal); margin: 4px 0; }
-#lv-note { font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: var(--lv-graphite); }
-#lv-foot { border-top: 1px solid var(--lv-rule); margin-top: 18px; padding-top: 12px; color: var(--lv-graphite); font-size: 13px; }
-#lv-foot a, #lv-head a { color: var(--lv-ink); }
+EXTRA_CSS = """
+#lv-answer h2 { font-family: 'Outfit', sans-serif; font-weight: 500; color: var(--ul-signal); margin: 4px 0; }
+#lv-note { font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: var(--ul-graphite); }
+.ul-note { color: var(--ul-graphite); font-size: 13px; margin: 12px 0 0; }
 """
-theme = gr.themes.Base(
-    primary_hue=gr.themes.Color(c50="#FBF9F4", c100="#F3EFE6", c200="#E3DDD0", c300="#C9C3B6", c400="#8F8A7E", c500="#3F3C36",
-                                c600="#1C1B18", c700="#1C1B18", c800="#1C1B18", c900="#1C1B18", c950="#1C1B18"),
-    neutral_hue="stone",
-    radius_size=gr.themes.sizes.radius_none,
-    font=[gr.themes.GoogleFont("Figtree"), "Helvetica Neue", "Arial", "sans-serif"],
-    font_mono=[gr.themes.GoogleFont("IBM Plex Mono"), "Menlo", "monospace"],
-).set(
-    body_background_fill="#F3EFE6", block_background_fill="#FBF9F4", block_border_color="#E3DDD0",
-    button_primary_background_fill="#1C1B18", button_primary_background_fill_hover="#3F3C36", button_primary_text_color="#F3EFE6",
-    body_background_fill_dark="#F3EFE6", block_background_fill_dark="#FBF9F4", body_text_color_dark="#1C1B18",
-)
-HEAD = '<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500&display=swap" rel="stylesheet">'
 
 with gr.Blocks(title="Lilavati · Udgam Labs") as demo:
-    gr.HTML(
-        '<div id="lv-head"><img src="/gradio_api/file=mark.svg" alt="Udgam Labs">'
-        '<div><p class="lv-label">Udgam Labs · <b>Pocket Mathematician</b> · Trained from scratch</p>'
-        '<h1>Lilavati</h1>'
-        '<p>A 95M-parameter model that solves maths word problems by writing a short Python program and running it.</p></div></div>'
-    )
+    gr.HTML(header("Lilavati", "Pocket Mathematician · Trained from scratch",
+                   "A 95M-parameter model that solves maths word problems by writing a short Python program and running it."))
     with gr.Row(equal_height=False):
         with gr.Column(scale=5):
             question = gr.Textbox(label="Maths word problem", value=EXAMPLES[0], lines=4, max_length=MAX_LEN)
@@ -99,16 +74,14 @@ with gr.Blocks(title="Lilavati · Udgam Labs") as demo:
             answer = gr.Markdown(elem_id="lv-answer")
             note = gr.Markdown(elem_id="lv-note")
             program = gr.Code(label="The program Lilavati wrote (it ran in a sandbox)", language="python", interactive=False)
-    gr.HTML(
-        '<div id="lv-foot">Model: <a href="https://huggingface.co/UdgamLabs/Lilavati">UdgamLabs/Lilavati</a> + '
-        '<a href="https://huggingface.co/UdgamLabs/Lilavati-Checker">Lilavati-Checker</a> (Apache-2.0) · '
-        'Code &amp; evaluation: <a href="https://github.com/UdgamLabs/lilavati">GitHub</a> · '
-        '<a href="https://udgamlabs.com/models/lilavati">udgamlabs.com</a><br>'
-        'A small research model: it makes mistakes, so check answers that matter. It always shows the program behind the '
-        'answer. Programs pass a structure check and run in a separate, limited process.</div>'
-    )
+    gr.HTML('<p class="ul-note">A small research model: it makes mistakes, so check answers that matter. It always shows the '
+            'program behind the answer. Programs pass a structure check and run in a separate, limited process.</p>')
+    gr.HTML(footer('Model: <a href="https://huggingface.co/udgamlabs/Lilavati">udgamlabs/Lilavati</a> + '
+                   '<a href="https://huggingface.co/udgamlabs/Lilavati-Checker">Lilavati-Checker</a> (Apache-2.0) · '
+                   'Code &amp; evaluation: <a href="https://github.com/udgamlabs/lilavati">GitHub</a> · '
+                   '<a href="https://udgamlabs.com/models/lilavati">Try box</a>'))
     btn.click(solve, [question, mode], [answer, note, program])
     question.submit(solve, [question, mode], [answer, note, program])
 
 if __name__ == "__main__":
-    demo.queue(max_size=16, default_concurrency_limit=1).launch(theme=theme, css=CSS, head=HEAD, allowed_paths=["mark.svg"])
+    demo.queue(max_size=16, default_concurrency_limit=1).launch(theme=theme, css=CSS + EXTRA_CSS, head=HEAD, allowed_paths=["mark.svg"])

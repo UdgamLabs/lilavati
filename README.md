@@ -1,26 +1,28 @@
-<p align="left"><strong>UDGAM LABS</strong> · Pocket Mathematician</p>
+![Lilavati · Udgam Labs](./assets/banner.png)
+
+**UDGAM LABS** · Maths model · 95M parameters
 
 # Lilavati
 
 A 95M-parameter English model that solves **maths word problems by writing a short Python program and running it**.
-Trained from scratch by **Udgam Labs**, a frontier technology lab. It runs on a laptop CPU. A second 95M model,
+Trained from scratch by **Udgam Labs**. It runs on a laptop CPU. A second 95M model,
 **Lilavati-Checker**, rates its programs, so that many tries can vote.
 
 The name comes from *Līlāvatī* (लीलावती), the book of arithmetic word problems that the mathematician Bhāskara II wrote
 in 1150 CE.
 
-**Release, October 2026:** weights and model cards on Hugging Face ([Lilavati](https://huggingface.co/UdgamLabs/Lilavati),
-[Lilavati-Checker](https://huggingface.co/UdgamLabs/Lilavati-Checker)), a [try box](https://udgamlabs.com/models/lilavati),
+**Release, October 2026:** weights and model cards on Hugging Face ([Lilavati](https://huggingface.co/udgamlabs/Lilavati),
+[Lilavati-Checker](https://huggingface.co/udgamlabs/Lilavati-Checker)), a [try box](https://udgamlabs.com/models/lilavati),
 and code, evaluation and checksums in this repository. Apache-2.0.
 
 <p align="center"><img src="docs/assets/how.png" alt="A chai-stall question, the program Lilavati wrote, and the answer 1,620" width="100%"></p>
 
-[Get started](#get-started) · [How it works](#how-it-works) · [How good is it](#how-good-is-it) · [Limits](#know-the-limits) · [Safety of running code](#running-model-written-code-safely) · [Files](#files)
+[Get started](#get-started) · [How it works](#how-it-works) · [How good is it](#how-good-is-it) · [Limits](#where-it-falls-short) · [Safety of running code](#running-model-written-code-safely) · [Files](#files)
 
 ## Get started
 
 ```bash
-git clone https://github.com/UdgamLabs/lilavati && cd lilavati
+git clone https://github.com/udgamlabs/lilavati && cd lilavati
 pip install -e .
 lilavati "A shop sells pencils at 8 rupees each. Riya buys 6 pencils and 2 erasers at 5 rupees each. She pays with a 100 rupee note. How much change does she get?" --show-program
 ```
@@ -96,7 +98,7 @@ answer in text, their native format. cagliostro-v3.5-chat was scored on the firs
 125M verifier picking one of 48 programs, where Lilavati with its checker scores 66.7%. The full table is in
 [docs/EVALUATION.md](docs/EVALUATION.md).
 
-## Know the limits
+## Where it falls short
 
 It is good at grade-school word problems: shopping and change, rates and speeds, percentages, discounts and tax, averages,
 simple interest, areas and perimeters, and multi-step arithmetic.
@@ -148,6 +150,10 @@ Code and weights: Apache-2.0.
   title  = {Lilavati: a 95M pocket mathematician that solves word problems by writing Python},
   author = {Udgam Labs},
   year   = {2026},
-  url    = {https://huggingface.co/UdgamLabs/Lilavati}
+  url    = {https://huggingface.co/udgamlabs/Lilavati}
 }
 ```
+
+---
+
+**About Udgam Labs.** Udgam Labs is an independent AI research lab. We work from first principles: before we build, we understand why things work, whether we are training a model, fine-tuning one or applying AI to a new problem. Udgam (उद्गम) is Sanskrit for origin. [udgamlabs.com](https://udgamlabs.com)

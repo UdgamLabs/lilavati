@@ -1,7 +1,7 @@
 """Lilavati: solve maths word problems by writing and running Python.
 
     from lilavati import Lilavati
-    lv = Lilavati()                        # downloads UdgamLabs/Lilavati (+ UdgamLabs/Lilavati-Checker)
+    lv = Lilavati()                        # downloads udgamlabs/Lilavati (+ udgamlabs/Lilavati-Checker)
     r = lv.solve("A shop sells pens at 12 rupees each. Riya buys 7 pens and pays 100 rupees. How much change?")
     print(r["answer"], r["agreement"], r["confidence"])
     print(r["program"])                    # the program that produced the answer
@@ -29,7 +29,7 @@ def _num(v):
 
 
 class Lilavati:
-    def __init__(self, model="UdgamLabs/Lilavati", checker="UdgamLabs/Lilavati-Checker", device=None, dtype=None):
+    def __init__(self, model="udgamlabs/Lilavati", checker="udgamlabs/Lilavati-Checker", device=None, dtype=None):
         import torch
         from transformers import AutoModelForCausalLM, AutoTokenizer
         self.torch = torch

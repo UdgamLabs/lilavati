@@ -19,8 +19,8 @@ def gold(answer_text):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--model", default="UdgamLabs/Lilavati")
-    ap.add_argument("--checker", default="UdgamLabs/Lilavati-Checker")
+    ap.add_argument("--model", default="udgamlabs/Lilavati")
+    ap.add_argument("--checker", default="udgamlabs/Lilavati-Checker")
     ap.add_argument("--tries", type=int, default=1)
     ap.add_argument("--temperature", type=float, default=0.7)
     ap.add_argument("--start", type=int, default=0)

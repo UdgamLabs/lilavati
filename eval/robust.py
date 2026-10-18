@@ -52,7 +52,7 @@ def correct(v, gold):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--sets", nargs="+", default=["gsmplus", "svamp", "asdiv", "gsmhard"])
-    ap.add_argument("--model", default="UdgamLabs/Lilavati")
+    ap.add_argument("--model", default="udgamlabs/Lilavati")
     ap.add_argument("--limit", type=int, default=0)
     ap.add_argument("--device", default=None)
     a = ap.parse_args()

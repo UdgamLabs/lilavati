@@ -1,7 +1,7 @@
 # Lilavati 1.0.0
 
-First public release, October 2026. The weights are on Hugging Face ([Lilavati](https://huggingface.co/UdgamLabs/Lilavati),
-[Lilavati-Checker](https://huggingface.co/UdgamLabs/Lilavati-Checker)). This repository adds the code, a local playground,
+First public release, October 2026. The weights are on Hugging Face ([Lilavati](https://huggingface.co/udgamlabs/Lilavati),
+[Lilavati-Checker](https://huggingface.co/udgamlabs/Lilavati-Checker)). This repository adds the code, a local playground,
 the evaluation scripts and checksums.
 
 - **Two models, 95M parameters each:** Lilavati writes a short Python program for a maths word problem; Lilavati-Checker

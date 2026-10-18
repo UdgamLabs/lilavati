@@ -21,7 +21,7 @@ lilavati = "lilavati.__main__:main"
 
 [project.urls]
 Homepage = "https://udgamlabs.com/models/lilavati"
-Weights = "https://huggingface.co/UdgamLabs/Lilavati"
+Weights = "https://huggingface.co/udgamlabs/Lilavati"
 
 [tool.setuptools]
 packages = ["lilavati"]
